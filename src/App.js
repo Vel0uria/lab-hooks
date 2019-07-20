@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Counter from "./components/Counter";
+import Form from "./components/Form";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [age, setAge] = useState("");
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  const inputChange = change => {
+    if (change.target.name === "name") setName(change.target.value);
+    if (change.target.name === "surname") setSurname(change.target.value);
+    if (change.target.name === "age") setAge(change.target.value);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Counter increment={increment} count={count} decrement={decrement} />
+      <Form inputChange={inputChange} name={name} surname={surname} age={age} />
     </div>
   );
 }
